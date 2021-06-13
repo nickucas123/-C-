@@ -1,0 +1,227 @@
+1.基础语法
+1）整形和字符串转换
+to_string函数：
+string to_string (int val);
+string to_string (long val);
+string to_string (long long val);
+string to_string (unsigned val);
+string to_string (unsigned long val);
+string to_string (unsigned long long val);
+string to_string (float val);
+string to_string (double val);
+string to_string (long double val)；
+功能：将数值转化为字符串。返回对应的字符串。
+例子：
+复制代码
+#include <iostream>   
+#include <string>     
+using namespace std;
+int main()
+{
+    string pi = "pi is " + std::to_string(3.1415926);
+    string perfect = to_string(1 + 2 + 4 + 7 + 14) + " is a perfect number";
+    cout << pi << '\n';
+    cout << perfect << '\n';
+    system("pause");
+    return 0;
+}
+
+stoi函数：
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+	int x;
+	string str = "-10";
+	string str1 = "-10a";
+	string str2 = "a10";
+	x = stoi(str1);		 //stoi()函数遇到字母时会自动停下
+	cout << x << endl;
+	//x = stoi(str2);    //stoi()函数没有数字的话，程序虽然可以编译，但运行时会出错
+	//cout << x << endl;
+	return 0;
+}
+
+2）C++ STL中提供了std::next_permutation与std::prev_permutation可以获取数字或者是字符的全排列，其中std::next_permutation提供升序、std::prev_permutation提供降序。
+// next_permutation example
+#include <iostream>     // std::cout
+#include <algorithm>    // std::next_permutation, std::sort
+int main() {
+	int myints[] = { 1,2,3 };
+	std::sort(myints, myints + 3);
+	std::cout << "The 3! possible permutations with 3 elements:\n";
+	do 
+	{
+		std::cout << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
+	} while (std::next_permutation(myints, myints + 3));
+	std::cout << "After loop: " << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
+	system("Pause");
+	return 0;
+}
+输出结果：
+The 3! possible permutations with 3 elements:
+1 2 3
+1 3 2
+2 1 3
+2 3 1
+3 1 2
+3 2 1
+After loop: 1 2 3
+请按任意键继续. . .
+
+// next_permutation example
+#include <iostream>     // std::cout
+#include <algorithm>    // std::next_permutation, std::sort, std::reverse
+int main() {
+	int myints[] = { 3,2,1 };
+	std::cout << "The 3! possible permutations with 3 elements:\n";
+	do {
+		std::cout << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
+	} while (std::prev_permutation(myints, myints + 3));
+	std::cout << "After loop: " << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
+	system("pause");
+	return 0;
+}
+输出结果：
+The 3! possible permutations with 3 elements:
+3 2 1
+3 1 2
+2 3 1
+2 1 3
+1 3 2
+1 2 3
+After loop: 3 2 1
+请按任意键继续. . .
+
+3）string的操作
+1、默认初始化
+string s; //s是一个空串
+2、使用字符串字面值初始化
+string s1=“hello world”; //拷贝初始化
+string s2(“hello world”); //直接初始化
+注意：s1、s2的内容不包括’\0’
+3、使用其他字符串初始化
+string s2=s1; //拷贝初始化，s1是string类对象
+string s2(s1); //直接初始化，s1是string类对象
+4、使用单个字符初始化
+string s(10, ‘a’); //直接初始化，s的内容是aaaaaaaaaa
+
+5、字符串的切片
+形式：s.substr(pos, n)，解释：返回一个string，包含s中从pos开始的n个字符的拷贝（pos的默认值是0，n的默认值是s.size() - pos，即不加参数会默认拷贝整个s）
+
+6、vector的翻转reverse
+reverse函数功能是逆序（或反转），多用于字符串、数组、容器。
+头文件是#include <algorithm>
+reverse(str.begin(),str.end());//str结果为 ih , dlrow olleh
+vector<int> v = {5,4,3,2,1};
+reverse(v.begin(),v.end());//容器v的值变为1,2,3,4,5
+
+7、char和int的相互转换
+char与int的相互转化，联想ASCII码，字符‘0’对应的值为48，所以不能直接加减‘ ’
+Char转int;
+char ch='9';
+int ch_int=ch-'0';//此时ch_int=9
+
+int转char
+int i=9；
+char i_ch=i+'0';//此时i_ch='9'
+
+
+4）结构
+struct PayRoll
+{
+    int empNumber;
+    string name;
+    double hours,payRate,grossPay;
+};
+构造函数初始化结构体
+struct Employee
+{
+    string name;    // 员工姓名
+    int vacationDays,    // 允许的年假
+    daysUsed;    //已使用的年假天数
+    Employee (string n ="",int d = 0)    // 构造函数
+    {
+        name = n;
+        vacationDays = 10;
+        daysUsed = d;
+    }
+};
+
+5）algorithm头文件下常用的函数
+1.max(),min(),abs()
+2.swap()
+3.reverse()
+4.next_permutation()
+5.Fill(),可以把数组一段全部赋值同一个数
+#include <iostream>     // std::cout
+#include <algorithm>    // std::fill
+#include <vector>       // std::vector
+using namespace std;
+int main () {
+  vector<int> myvector (8);                       // myvector: 0 0 0 0 0 0 0 0
+  fill (myvector.begin(),myvector.begin()+4,5);   // myvector: 5 5 5 5 0 0 0 0
+  fill (myvector.begin()+3,myvector.end()-2,8);   // myvector: 5 5 5 8 8 8 0 0
+meset()
+ memset是以字节为单位，初始化内存块。
+当初始化一个字节单位的数组时，可以用memset把每个数组单元初始化成任何你想要的值，比如，
+char data[10];
+memset(data, 1, sizeof(data)); // right
+memset(data, 0, sizeof(data)); // right
+而在初始化其他基础类型时，则需要注意，比如,
+int data[10];
+memset(data, 0, sizeof(data)); // right
+memset(data, -1, sizeof(data)); // right
+memset(data, 1, sizeof(data)); // wrong, data[x] would be 0x0101 instead of 1
+
+6.sort()
+7.lower_bound()和upper_bound()
+
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+#include<cstring>
+#include<algorithm>
+using namespace std;
+const int maxn=10000;
+int main()
+{
+    int a,b,s[maxn],key;
+    key=0;
+    while(scanf("%d%d",&a,&b)==2&&a){
+    printf("CASE# %d:\n",++key);
+    for(int i=0;i<a;i++)
+       scanf("%d",&s[i]);
+        sort(s,s+a);
+    while(b--){
+        int m;
+        cin>>m;
+        int p=lower_bound(s,s+a,m)-s;
+        if(s[p]==m)
+            printf("%d found at %d\n",m,p+1);
+        else
+            printf("%d not found\n",m);
+    }
+    }
+    return 0;
+}
+lower_bound(起始地址，结束地址，要查找的数值) 返回的是数值 第一个 出现的位置。upper_bound(起始地址，结束地址，要查找的数值) 返回的是 第一个大于待查找数值 出现的位置。
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+int main()
+{
+	vector<int> ve(8, 0);
+	for (int i = 0; i < 8; i++)
+	{
+		ve[i] = i;
+	}
+	auto low = lower_bound(ve.begin(), ve.end(), 3)-ve.begin();
+	int upp = upper_bound(ve.begin(), ve.end(), 3) - ve.begin();
+	cout<<low<<endl;
+	cout << upp << endl;
+}
+输出：
+3和4
