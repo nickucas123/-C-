@@ -1,0 +1,28 @@
+1)链表
+头指针
+指向链表第一个结点的存储位置的指针称为头指针，每次访问链表时可以从头指针依次遍历链表中的每个元素
+头结点
+有时在单链表的第一个结点之前附设一个结点，称之为头结点 。
+如果链表有头结点，那么头指针就是指向头结点的指针。
+struct node{
+int data;
+node* next;
+};
+new运算符：
+Int *p=new int;
+Node *p=new node;
+Delete运算符：delete(p);
+
+2)树
+struct node{
+type data;
+node* lchild;
+node* rchild;
+};
+建立一个新的节点要用的函数，v为节点权重
+Node * newnode(int v){
+Node *Node=new node;
+Node->data =v;
+Node->lchild=Node->rchild=NULL;//初始的状况每左右孩子
+return Node;
+}
